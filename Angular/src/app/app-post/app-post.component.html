@@ -1,0 +1,109 @@
+<ng-container *ngIf="AuthenticationService.isAuthenticated$ | async; else loggedOut">
+
+
+    <br>
+
+    <div class="container">
+        <a class="btn btn-primary" type="button" href="/home" >Go Back</a>
+        <br> 
+        <br>
+        <div class="card" style="width: 50vh;">
+                <div class="card-body" *ngFor="let post of list_of_posts">
+        
+
+                    <h5 class="card-title">Title: {{ post.post_title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Post by User: <a  class="text-uppercase" [routerLink]="['/user', post.post_author_username]" style="cursor: pointer">{{ post.post_author_username }}</a> </h6>
+                    <h6 class="card-subtitle mb-2 text-muted"> This post was created on {{ post.post_creation_datetime }} <br> Post Upvote Count: {{ post.post_upvotes }} </h6>
+                    <p class="card-text">{{ post.post_body }}</p>
+                    <hr>
+                    
+                    {{ post.post_comments}}
+    
+                    <div ng-show="( post.post_comments | json) != '{}'">
+                        <h6 class="card-subtitle mb-2 text-muted"> No Comments's Found </h6>
+                    </div>
+
+                    <hr>
+                <div id="btns">
+                    <!-- <button class="btn btn-primary" (click)="onUpvote()" [routerLink]="['/upvote', post.post_uuid]"> Upvote</button> -->
+                    <!-- <button class="btn btn-primary"(click)="onUpdate()" [routerLink]="['/edit', post.post_uuid]"> Edit </button> -->
+                    <button class="btn btn-primary" [routerLink]="['/edit', post.post_uuid]"> Edit </button>
+                    <button class="btn btn-primary"(click)="onDelete()" [routerLink]="['/delete', post.post_uuid]"> Delete </button>
+                </div>
+
+         
+     
+                </div>
+    
+                </div>
+            </div>
+
+ 
+</ng-container>
+<ng-template #loggedOut>
+
+    <br>
+
+    <!-- <div class="container">
+        <a class="btn btn-primary" type="button" onclick="history.back()" >Go Back</a>
+        <br> 
+        <br>
+        <div class="card" style="width: 100vh;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.post_title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Post by: <a [routerLink]="['/user', post.post_author_username]" style="cursor: pointer">{{ post.post_author_username }}</a> on {{
+                        post.post_creation_datetime }} | Post upvotes: {{ post.post_upvotes }} </h6>
+                    <p class="card-text">{{ post.post_body }}</p>
+                    <hr>
+    
+                    <div ng-show="( post.post_comments | json) != '{}'">
+                        <h6 class="card-subtitle mb-2 text-muted"> No Comments's Found </h6>
+                    </div>
+                </div>
+    
+                </div>
+            </div> -->
+
+
+    <!-- User is logged out -->
+</ng-template>
+
+
+
+<style> 
+    #btns button {
+        margin-right: 10px;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    #comment_field {
+        width: 90%;
+    }
+
+    form {
+        display: inline-block;
+        padding-right: 10px;
+    }
+
+    #page_control button {
+        margin-right: 15px;
+    }
+</style>

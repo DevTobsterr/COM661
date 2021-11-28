@@ -1,0 +1,169 @@
+<ng-container *ngIf="AuthenticationService.isAuthenticated$ | async; else loggedOut">
+  <div class="container-fluid">
+<nav class="navbar navbar-expand-md navbar-light">
+
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+
+        <li class="nav-item" *ngIf = "AuthenticationService.user$ | async as user">
+          <a class="nav-link text-dark">{{ user.name }}</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home</a>
+        </li>
+
+                             
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">Search User</a>
+        </li>
+
+                     
+        <li class="nav-item">
+          <a class="nav-link" href="/create">Submit a Post</a>
+        </li>
+          
+        <li class="nav-item">
+          <a class="nav-link" (click)="AuthenticationService.logout()" style="cursor: pointer;">Logout</a>
+        </li>
+
+      
+
+
+      </ul>
+  </div>
+</nav>
+</div>
+</ng-container>
+
+
+<ng-template #loggedOut>
+
+
+
+  <nav class="navbar navbar-expand-md navbar-light">
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+  
+             
+          <li class="nav-item">
+            <a class="nav-link" href="/home">Home</a>
+          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+
+
+  
+  
+  
+        </ul>
+    </div>
+  </nav>
+
+
+
+
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="jtron" class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">COM661 | BelfastBlog</h1>
+    <p class="lead">A Blog. Plain and Simple.</p>
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>
+
+<footer id="footer" class="text-center text-lg-start">
+  <hr>
+
+  <div class="container p-4">
+    <!--Grid row-->
+    <div class="row">
+
+      <div class="col-lg-8 col-md-12 ">
+        <h5 class="text-uppercase">BelfastBlog</h5>
+
+        <p class="text-justify">
+          BelfastBlog is a full stack web application using Flask, MongoDB and Angular for a blog style application.
+
+        </p>
+
+        <p class="text-justify">
+          Contact Email: killen-t1@ulster.ac.uk
+
+        </p>
+      </div>
+
+      <div class="col-lg-4 col-md-12">
+        <h5 class="text-uppercase">Get in touch</h5>
+
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a href="https://www.linkedin.com/in/toby-k-965b77140/">LinkedIn</a>
+          </li>
+          <li>
+            <a href="https://github.com/DevTobsterr">GitHub</a>
+          </li>
+          <li>
+            <a href="https://twitter.com/itoby24">Twitter</a>
+          </li>
+        </ul>
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+  <div class="text-center p-3">
+    © 2021 Copyright:
+    <a href="http://www.tobykillen.com">tobykillen.com</a>
+  </div>
+</footer>
+
+<style>
+  #jtron {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: black;
+    color: white;
+  }
+
+  #footer {
+    background-color: black;
+    color: white;
+  }
+
+  #footer a {
+    color: white;
+  }
+</style>

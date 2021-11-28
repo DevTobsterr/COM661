@@ -1,0 +1,67 @@
+<div class="container">
+  <br>
+  <a class="btn btn-primary" type="button" href="/home" >Go Back</a>
+  <br> 
+  <br>
+
+
+  <div class="card" style="width: 100vh;">
+          <div class="card-body" *ngFor="let post of list_of_posts">
+
+            <a href=""> {{ post.post_title }}</a>
+            <h1 class="title text-uppercase"> Use the form below to Update your post. </h1>
+
+                    <form [formGroup]=blog_update_submission_form (ngSubmit)="onUpdate()">
+                      
+                      <div class="form-group">
+                          <label for="exampleFormControlInput1">Post Author: </label>
+                          <input value="{{ post.post_author_username }}" type="text" class="form-control" id="" formControlName="Post_Author">
+                      </div>
+              
+                      <div class="form-group">
+                          <label for="exampleFormControlInput1">Post Title: </label>
+                          <input value="{{ post.post_title }}" type="email" class="form-control" id="" formControlName="Post_Title" >
+                      </div>
+              
+                      <div class="form-group">
+                          <label for="exampleFormControlTextarea1">Post Body: </label>
+                          <textarea value="{{ post.post_body }}" class="form-control" id="" formControlName="Post_Body" rows="3" ></textarea>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Post Upvote Count: </label>
+                        <input value="{{ post.post_upvotes }}" type="number" class="form-control" id="" formControlName="Post_Upvotes">
+
+                      </div>
+              
+              
+                      <br>
+              
+                  <div id="btns">
+                    <button class="btn btn-primary" type="submit"> Update Blog </button>
+                    <button class="btn btn-danger" onclick="reset()"> Reset Form </button>
+                  </div>
+                  <p class="mt-5 mb-3 text-muted"> BelfastBlog | © 2021 </p>
+
+                <hr>
+
+                    </form>
+   
+
+        </div>
+  </div>
+    
+
+</div>
+      
+  
+  
+  <style>
+    #form-div {
+      width: 60vh;
+    }
+  
+    #btns button {
+      margin-right: 10px;
+    }
+  </style>

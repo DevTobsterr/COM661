@@ -1,0 +1,48 @@
+<div id="form-div" class="container">
+
+
+  <hr>
+
+
+
+
+
+
+  <form [formGroup]="login_form" class="form-signin" (ngSubmit)="onSubmit()">
+    <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+    <label for="inputEmail" class="sr-only">Username</label>
+    <input type="email" id="username" formControlName="username" class="form-control" placeholder="Username" required="" autofocus=""
+      style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password" required=""style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+    <div class="checkbox mb-3">
+      <br>
+      <label>
+        Don't have an account? Sign up <a href="/signup">here.</a>
+      </label>
+    </div>
+    <div id="btns">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+      <button class="btn btn-lg btn-primary btn-block" (click)="AuthenticationService.loginWithRedirect()">Log in with
+        OAuth </button>
+
+
+
+
+    </div>
+    <p class="mt-5 mb-3 text-muted"> BelfastBlog | © 2021 </p>
+  </form>
+
+  <hr>
+</div>
+
+
+<style>
+  #form-div {
+    width: 60vh;
+  }
+
+  #btns button {
+    margin-right: 10px;
+  }
+</style>

@@ -1,0 +1,132 @@
+<ng-container *ngIf="AuthenticationService.isAuthenticated$ | async; else loggedOut">
+
+
+
+    <div class="container">
+
+         
+        <br>
+    <h1 class="text-center"> BelfastBlog  | All Blog Post's</h1>
+        <div *ngFor="let post of list_of_posts | async">
+            <br>
+
+            <div class="card" style="width: 50vh;">
+                <div class="card-body">
+
+                    <h5 class="card-title">Title: {{ post.post_title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Post by User: <a  class="text-uppercase" [routerLink]="['/user', post.post_author_username]" style="cursor: pointer">{{ post.post_author_username }}</a> </h6>
+                    <h6 class="card-subtitle mb-2 text-muted"> This post was created on {{ post.post_creation_datetime }} <br> Post Upvote Count: {{ post.post_upvotes }} </h6>
+                    <p class="card-text">{{ post.post_body }}</p>
+                    <hr>
+                    
+    
+                    <div ng-show="( post.post_comments | json) != '{}'">
+                        <h6 class="card-subtitle mb-2 text-muted"> No Comments's Found </h6>
+                    </div>
+                    
+                    <button class="btn btn-primary" [routerLink]="['/post', post.post_uuid ]" style="cursor: pointer"> View Post {{ post.post_uuid }}</button>
+    
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div id="page_control">
+            <button class="btn btn-primary" (click)="PreviousPage()"> Previous Page </button>
+            <button class="btn btn-primary" (click)="NextPage()" style="cursor: pointer;"> Next Page </button>
+        </div>
+        
+        <p class="mt-5 mb-3 text-muted"> BelfastBlog | © 2021 </p>
+
+        <hr>
+
+    </div>
+    
+
+
+    
+    
+
+
+ <!-- Is the User logged in -->
+
+
+
+</ng-container>
+<ng-template #loggedOut>
+
+
+    <div class="container">
+        <hr>
+        <h1 class="title text-uppercase">You're Not logged in. |  Please Login To See Posts. </h1>    
+        <a href="/login" class="btn btn-primary">Login</a>
+        <p class="mt-5 mb-3 text-muted"> BelfastBlog | © 2021 </p>
+        <hr>
+
+    </div>
+
+    <!-- <div class="container">
+        <br>
+    <h1 class="text-center"> BelfastBlog  | All Blog Post's</h1>
+        <div *ngFor="let post of webservice.list_of_posts">
+            <br>
+
+            <div class="card" style="width: 100vh;">
+                <div class="card-body">
+                    <h5 class="card-title">Post: {{ post.post_title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Post by:  <a [routerLink]="['/user', post.post_author_username]" style="cursor: pointer">{{ post.post_author_username }}</a> on {{
+                        post.post_creation_datetime }} </h6>
+                    <p class="card-text">{{ post.post_body }}</p>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div id="page_control">
+            <button class="btn btn-primary"> Next Page </button>
+            <button class="btn btn-primary"> Previous Page </button>
+        </div>
+    </div> -->
+    
+
+</ng-template>
+
+
+
+<style>
+    #btns button {
+        margin-left: 10px;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    #comment_field {
+        width: 90%;
+    }
+
+    form {
+        display: inline-block;
+        padding-right: 10px;
+    }
+
+    #page_control button {
+        margin-right: 15px;
+    }
+</style>

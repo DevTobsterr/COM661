@@ -1,0 +1,59 @@
+<div id="form-div" class="container">
+    <br>
+    <a class="btn btn-primary" type="button" [routerLink]="['/home']"style="cursor: pointer">Go Back</a>
+    <br>
+    <hr>
+
+    <h1 class="h3 mb-3 font-weight-normal">Post a submission to the blog.</h1>
+
+
+
+
+
+
+
+
+    <form [formGroup]=blog_submission_form (ngSubmit)="onSubmit()">
+
+
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Post Author: </label>
+            <input type="text" class="form-control" id="" formControlName="Post_Author" placeholder="Example: Toby Killen">
+        </div>
+
+
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Post Title: </label>
+            <input type="email" class="form-control" id="" formControlName="Post_Title" placeholder="Example: What's the craic?">
+        </div>
+
+      
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Post Body: </label>
+            <textarea class="form-control" id="" formControlName="Post_Body" rows="3" placeholder="Example: Keep er lit"></textarea>
+        </div>
+
+
+        <br>
+
+        <div id="btns">
+        <button class="btn btn-primary" type="submit">Create Blog </button>
+        <button onclick=reset() class="btn btn-danger">Reset Form</button>
+     </div>
+            <p class="mt-5 mb-3 text-muted"> BelfastBlog | © 2021 </p>
+    </form>
+
+    <hr>
+</div>
+
+
+<style>
+    #form-div {
+        width: 60vh;
+    }
+
+    #btns button {
+        margin-right: 10px;
+    }
+</style>
