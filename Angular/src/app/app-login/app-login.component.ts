@@ -19,7 +19,7 @@ export class AppLoginComponent implements OnInit {
   login_form: any;
 
   onSubmit() {
-    console.log(this.login_form.value);
+    console.log("Logged In");
   }
 
 

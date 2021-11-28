@@ -15,18 +15,17 @@ export class AppEditPostComponent implements OnInit {
 
   constructor(private webservice: WebService, private Router: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) { }
 
-  
-
 
   onUpdate() {
-    this.webservice.updatePost(this.blog_update_submission_form.value)
-    this.router.navigate(["/"])
+    this.webservice.updatePost(this.blog_update_submission_form.value);
+    this.router.navigate(["/"]);
   }
 
   async ngOnInit() {
-    
+
     var response = await this.webservice.getPost(this.Router.snapshot.params["Post_ID"]);
     this.list_of_posts = response;
+    
 
     this.blog_update_submission_form = this.formBuilder.group({
       "Post_Author": ["", Validators.required],
@@ -34,6 +33,8 @@ export class AppEditPostComponent implements OnInit {
       "Post_Body": ["", Validators.required],
       "Post_Upvotes": ["", Validators.required],
     })
+
+   
 
 
 

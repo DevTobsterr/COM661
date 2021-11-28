@@ -1,4 +1,5 @@
 import functools
+from itertools import count
 import re
 from flask import Flask, json, make_response, request, jsonify
 from flask.globals import g
@@ -114,7 +115,7 @@ def get_one_post(Post_UUID):
 
 
 @app.route("/api/v1.0/posts/<int:Post_UUID>", methods=["DELETE"])
-def delete_one_post(Post_UUID):
+def update_one_post(Post_UUID):
    if request.method == "DELETE":
         Post_Object = mongo_posts.delete_one({'post_uuid':Post_UUID})
         if Post_Object.deleted_count == 1:
@@ -170,10 +171,99 @@ def edit_one_post(Post_UUID):
                 return make_response( jsonify( { "ALERT!":"Invalid Post ID" } ), 404)
         else:
             return make_response( jsonify({ "ALERT!" : "Missing Form Data. Please Try Again." } ), 404)
-         
-
 
         
+
+
+
+@app.route("/api/v1.0/posts/<int:Post_UUID>/comments/<int:Comment_UUID>", methods=["PUT"])
+def update_one_comment(Post_UUID, Comment_UUID):
+    if request.method == "PUT":
+        new_comment_author = request.form["Comment_Author"]
+        new_comment_body = request.form["Comment_Body"]
+        mongo_posts.update({"post_uuid": Post_UUID, "post_comments.comment_uuid": Comment_UUID}, {"$set": {"post_comments.$.comment_author": new_comment_author, "post_comments.$.comment_body": new_comment_body }})
+        return make_response(jsonify({"SUCCESS!" : "COMMENT WAS SUCCESSFULLY UPDATED"}))
+ 
+
+
+@app.route("/api/v1.0/posts/<int:Post_UUID>/comments", methods=["GET"])
+def get_all_comments(Post_UUID): 
+    if request.method == "GET":
+        data_to_return = []
+        for Post_Object in mongo_posts.find({"post_uuid": Post_UUID}, {"_id":0,"post_comments": 1}):
+            try:
+                data_to_return.append(Post_Object["post_comments"])
+            except:
+                return make_response(jsonify({"ALERT!": "POST DOES NOT EXISTS"}), 404)
+
+            if len(data_to_return[0]) > 0:
+                return make_response(jsonify(data_to_return), 200)
+            else:
+                return make_response(jsonify({"ALERT!": "NO COMMENTS FOUND"}), 404)
+        else:
+            return make_response(jsonify({"ALERT!": "POST WAS NOT FOUND"}))
+
+
+
+@app.route("/api/v1.0/posts/<int:Post_UUID>/comments/<int:Comment_UUID>", methods=["GET"])
+def get_one_comments(Post_UUID, Comment_UUID): 
+    if request.method == "GET":
+        data_to_return = []
+
+        for Post_Object in mongo_posts.find({"post_uuid": Post_UUID, "post_comments.comment_uuid": Comment_UUID}, {"post_comments.$": 1, "_id": 0}):
+            data_to_return.append(Post_Object["post_comments"])
+            if len(data_to_return[0]) > 0:
+                return make_response(jsonify(data_to_return), 200)
+            else:
+                return make_response(jsonify({"ALERT!": "SOMETHING WENT WRONG. CHECK YOUR REQUEST AND TRY AGAIN. REVIEW TERMINAL FOR ERROR"}), 404)
+        else:
+            return make_response(jsonify({"ALERT!": "POST WAS NOT FOUND"}))
+
+@app.route("/api/v1.0/posts/<int:Post_UUID>/comments", methods=["POST"])
+def create_comment(Post_UUID):
+    if request.method == "POST":
+        for Post_Object in mongo_posts.find({"post_uuid": Post_UUID}):
+
+            if len(Post_Object["post_comments"]) == 0:
+                comment_uuid = 0
+            else:
+                comment_uuid = Post_Object["post_comments"][-1]["comment_uuid"] + 1
+                
+            mongo_posts.update_one({"post_uuid": Post_UUID}, 
+            {       "$push": {"post_comments": {
+                    "comment_uuid": comment_uuid,
+                    "comment_author": request.form["Comment_Author"],
+                    "comment_body": request.form["Comment_Body"], }}})
+                    
+            return make_response(jsonify({"SUCCESS!": "COMMENT WAS ADDED SUCCESSFULLY"}), 200)
+
+
+@app.route("/api/v1.0/posts/<int:Post_UUID>/comments/<int:Comment_UUID>", methods=["DELETE"])
+def delete_comment(Post_UUID, Comment_UUID):
+    if request.method == "DELETE":
+        Comment_Object = mongo_posts.update_one({"post_uuid": Post_UUID}, {"$pull": {"post_comments": {"comment_uuid": Comment_UUID}}})
+        if Comment_Object.matched_count == 1:
+            return make_response(jsonify({"SUCCESS!": "COMMMENT WAS DELETED SUCCESSFULLY"}))
+        else:
+            return make_response(jsonify({"ALERT!": "SOMETHING WENT WRONG. CHECK YOUR REQUEST AND TRY AGAIN. REVIEW TERMINAL FOR ERROR"}), 404)
+            
+            
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

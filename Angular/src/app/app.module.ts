@@ -10,7 +10,6 @@ import { AppSignupComponent } from './app-signup/app-signup.component';
 import { WebService } from './web.service';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AppPostComponent } from './app-post/app-post.component';
-import { AppProfileComponent } from './app-profile/app-profile.component';
 import { AppCreatePostComponent } from './app-create-post/app-create-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppEditPostComponent } from './app-edit-post/app-edit-post.component';
@@ -25,7 +24,6 @@ import { AppEditPostComponent } from './app-edit-post/app-edit-post.component';
     AppLoginComponent,
     AppSignupComponent,
     AppPostComponent,
-    AppProfileComponent,
     AppCreatePostComponent,
     AppEditPostComponent
   ],

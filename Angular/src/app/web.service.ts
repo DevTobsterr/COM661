@@ -28,8 +28,8 @@ export class WebService {
         PostContent.append("Post_Title", Post_Content.Post_Title);
         PostContent.append("Post_Body", Post_Content.Post_Body);
         PostContent.append("Post_Upvotes", Post_Content.Post_Upvotes);
-        console.log(Post_Content)
-        return this.http.put<any>('http://127.0.0.1:5000/api/v1.0/posts/', PostContent).toPromise();
+        console.log(Post_Content);
+        return this.http.put('http://127.0.0.1:5000/api/v1.0/posts', PostContent);
     }
 
     createPost(Post_Content: any) {
@@ -37,12 +37,13 @@ export class WebService {
         PostContent.append("Post_Author", Post_Content.Post_Author);
         PostContent.append("Post_Title", Post_Content.Post_Title);
         PostContent.append("Post_Body", Post_Content.Post_Body);
-        return this.http.post("http://127.0.0.1:5000/api/v1.0/posts", PostContent).toPromise();
+        return this.http.post("http://127.0.0.1:5000/api/v1.0/posts/", PostContent);
     }
 
-
-    getProfile(User_ID: any) {
-        return this.http.get("http://127.0.0.1:5000/api/v1.0/profile/"+ User_ID).toPromise();
+    getProfile(Post_Content: any) {
+        let Username = new FormData();
+        Username.append("Username", Post_Content.Username)
+        return this.http.get("http://127.0.0.1:5000/api/v1.0/profile/"+ Username).toPromise();
     }
 
 

@@ -5,7 +5,6 @@ import { AppEditPostComponent } from './app-edit-post/app-edit-post.component';
 import { AppHomeComponent } from './app-home/app-home.component';
 import { AppLoginComponent } from './app-login/app-login.component';
 import { AppPostComponent } from './app-post/app-post.component';
-import { AppProfileComponent } from './app-profile/app-profile.component';
 import { AppSignupComponent } from './app-signup/app-signup.component';
 
 const routes: Routes = [
@@ -14,8 +13,6 @@ const routes: Routes = [
   { path: "login", component: AppLoginComponent},
   { path: "signup", component: AppSignupComponent},
   { path: "post/:Post_ID", component: AppPostComponent},
-  { path: "user/:User_ID", component: AppProfileComponent},
-  { path: "profile", component: AppProfileComponent},
   { path: "create", component: AppCreatePostComponent},
   { path: "edit/:Post_ID", component: AppEditPostComponent},
   { path: "profile/:Post_ID", component: AppEditPostComponent},

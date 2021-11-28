@@ -3,10 +3,10 @@
         "post_author_username": "sdurrell0",
         "post_title": "Sample Data",
         "post_body": "Hello_2",
-        "post_comments": [],
+        "post_comments": ["HELLO"],
         "post_upvotes": 31,
         "post_creation_datetime": "2021-03-18",
-        "post_uuid": 10
+        "post_uuid": 101
     },
     {
         "post_author_username": "rhandscombe1",

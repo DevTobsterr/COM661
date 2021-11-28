@@ -18,8 +18,8 @@ export class AppCreatePostComponent implements OnInit {
 
 
   onSubmit() {
-    this.webservice.createPost(this.blog_submission_form.value)
-    this.Router.navigate(["/"])
+    this.webservice.createPost(this.blog_submission_form.value);
+    this.Router.navigate(["/"]);
   }
 
   ngOnInit(): void {
