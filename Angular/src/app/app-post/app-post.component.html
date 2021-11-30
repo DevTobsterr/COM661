@@ -11,31 +11,75 @@
                 <div class="card-body" *ngFor="let post of list_of_posts">
         
 
-                    <h5 class="card-title">Title: {{ post.post_title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Post by User: <a  class="text-uppercase" [routerLink]="['/user', post.post_author_username]" style="cursor: pointer">{{ post.post_author_username }}</a> </h6>
-                    <h6 class="card-subtitle mb-2 text-muted"> This post was created on {{ post.post_creation_datetime }} <br> Post Upvote Count: {{ post.post_upvotes }} </h6>
-                    <p class="card-text">{{ post.post_body }}</p>
-                    <hr>
-                    
-                    {{ post.post_comments}}
-    
-                    <div ng-show="( post.post_comments | json) != '{}'">
-                        <h6 class="card-subtitle mb-2 text-muted"> No Comments's Found </h6>
-                    </div>
+                    <h5 class="card-title text-uppercase">Post Title: {{ post.post_title }} | Posted On {{ post.post_creation_datetime }}</h5>
+
+                    <h6 class="card-subtitle mb-2"> Post ID Number: {{ post.post_uuid }} </h6>
+                    <h6 class="card-subtitle mb-2"> Post Created By User: {{ post.post_author_username }} </h6>
+                    <h6 class="card-subtitle mb-2"> Post Body: {{ post.post_body }} </h6>
+                    <h6 class="card-subtitle mb-2"> Post Upvotes: {{ post.post_upvotes }} </h6>
 
                     <hr>
+                    <h1 class="lead">Comments for Post {{ post.post_uuid }}</h1>
+                    <div class="card-body" *ngFor="let comment of list_of_comments">
+                    <h6 class="card-subtitle mb-2"> Comment ID: {{ comment.comment_uuid }} </h6>
+                    <h6 class="card-subtitle mb-2"> Comment Author: {{ comment.comment_author }} </h6>
+                    <h6 class="card-subtitle mb-2"> Comment Body: {{ comment.comment_body }} </h6>
+                    
+                        <div id="btns"> 
+                            <button class="btn btn-outline-primary" [routerLink]="['/edit', post.post_uuid, comment.comment_uuid]"> Edit Comment</button>
+                            <button class="btn btn-outline-danger" (click)="onDeleteComment(comment.comment_uuid)"> Delete Comment</button>
+                        </div>
+
+
+
+        
+                    </div>
+
+
+
+                    <hr>
+
+
+
+                    <form [formGroup]=CommentForm (ngSubmit)="onCreateComment()">
+
+                        <h5 class="card-title">Have a comment? Post it here.</h5>
+                            
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Comment Author: </label>
+                                <input type="text" class="form-control" id="" formControlName="Comment_Author"> 
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Comment Body: </label>
+                                <input type="email" class="form-control" id="" formControlName="Comment_Body">
+                            </div>
+                    
+                            <br>
+                            <button class="btn btn-outline-primary" type="submit">Create Comment</button>
+                    
+                
+                        </form> 
+                            <hr>
                 <div id="btns">
                     <!-- <button class="btn btn-primary" (click)="onUpvote()" [routerLink]="['/upvote', post.post_uuid]"> Upvote</button> -->
                     <!-- <button class="btn btn-primary"(click)="onUpdate()" [routerLink]="['/edit', post.post_uuid]"> Edit </button> -->
-                    <button class="btn btn-primary" [routerLink]="['/edit', post.post_uuid]"> Edit </button>
-                    <button class="btn btn-primary"(click)="onDelete()" [routerLink]="['/delete', post.post_uuid]"> Delete </button>
+                    <button class="btn btn-warning" [routerLink]="['/edit', post.post_uuid]"> Edit Post </button>
+                    <button class="btn btn-danger" (click)="onDeletePost()" > Delete Post </button>
                 </div>
 
-         
-     
                 </div>
-    
+
+            
                 </div>
+                    
+
+
+
+
+
+
+                <p class="mt-5 mb-3 text-muted"> BelfastBlog | © 2021 </p>
             </div>
 
  

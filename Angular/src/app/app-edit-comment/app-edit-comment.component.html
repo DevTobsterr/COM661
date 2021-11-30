@@ -1,0 +1,57 @@
+<div class="container">
+    <br>
+    <a class="btn btn-primary" type="button" href="/home" >Go Back</a>
+    <br> 
+    <br>
+  
+  
+    <div class="card" style="width: 100vh;">
+            <!-- <div class="card-body" *ngFor="let post of list_of_posts"> -->
+            <div class="card-body" >
+
+  
+              <!-- <a href=""> {{ post.post_title }}</a> -->
+              <h1 class="title text-uppercase"> Use the form below to Update your Comment. <br> Comment ID:  </h1>
+  
+                      <form [formGroup]=comment_update_submission_form (ngSubmit)="onUpdate()">
+                        
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Comment Author: </label>
+                            <input value="#" type="text" class="form-control" id="" formControlName="Post_Author">
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Comment Body: </label>
+                            <input value="" type="email" class="form-control" id="" formControlName="Post_Title" >
+                        </div>
+                
+                        <br>
+                
+                    <div id="btns">
+                      <button class="btn btn-primary" type="submit"> Update Comment </button>
+                      <button class="btn btn-danger" onclick="reset()"> Reset Form </button>
+                    </div>
+                    <p class="mt-5 mb-3 text-muted"> BelfastBlog | © 2021 </p>
+  
+                  <hr>
+  
+                      </form>
+     
+  
+          </div>
+    </div>
+      
+  
+  </div>
+        
+    
+    
+    <style>
+      #form-div {
+        width: 60vh;
+      }
+    
+      #btns button {
+        margin-right: 10px;
+      }
+    </style>

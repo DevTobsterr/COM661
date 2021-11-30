@@ -18,7 +18,7 @@
                     <h6 class="card-subtitle mb-2 text-muted"> This post was created on {{ post.post_creation_datetime }} <br> Post Upvote Count: {{ post.post_upvotes }} </h6>
                     <p class="card-text">{{ post.post_body }}</p>
                     <hr>                    
-                    <button class="btn btn-primary" [routerLink]="['/post', post.post_uuid ]" style="cursor: pointer"> View Post {{ post.post_uuid }}</button>
+                    <button class="btn btn-outline-primary" [routerLink]="['/post', post.post_uuid ]" style="cursor: pointer"> View Post {{ post.post_uuid }}</button>
     
                 </div>
             </div>

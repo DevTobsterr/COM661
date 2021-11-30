@@ -13,6 +13,8 @@ import { AppPostComponent } from './app-post/app-post.component';
 import { AppCreatePostComponent } from './app-create-post/app-create-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppEditPostComponent } from './app-edit-post/app-edit-post.component';
+import { AppEditCommentComponent } from './app-edit-comment/app-edit-comment.component';
+
 
 
 
@@ -25,7 +27,8 @@ import { AppEditPostComponent } from './app-edit-post/app-edit-post.component';
     AppSignupComponent,
     AppPostComponent,
     AppCreatePostComponent,
-    AppEditPostComponent
+    AppEditPostComponent,
+    AppEditCommentComponent,
   ],
   imports: [
     BrowserModule,

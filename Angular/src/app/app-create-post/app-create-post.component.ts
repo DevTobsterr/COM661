@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,12 +13,13 @@ export class AppCreatePostComponent implements OnInit {
 
   blog_submission_form: any;
 
-  constructor(private webservice: WebService, private formBuilder: FormBuilder, public AuthenticationService: AuthService, private Router: Router) { }
+  constructor(public webservice: WebService, private formBuilder: FormBuilder, public AuthenticationService: AuthService, private Router: Router) { }
 
 
   onSubmit() {
     this.webservice.createPost(this.blog_submission_form.value);
     this.Router.navigate(["/"]);
+    // console.log(this.blog_submission_form.value);
   }
 
   ngOnInit(): void {
@@ -29,8 +29,6 @@ export class AppCreatePostComponent implements OnInit {
       "Post_Body": ["", Validators.required],
       
     })
-
-
   }
 
 }

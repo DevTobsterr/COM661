@@ -191,15 +191,12 @@ def get_all_comments(Post_UUID):
     if request.method == "GET":
         data_to_return = []
         for Post_Object in mongo_posts.find({"post_uuid": Post_UUID}, {"_id":0,"post_comments": 1}):
-            try:
+            if Post_Object != {}:
                 data_to_return.append(Post_Object["post_comments"])
-            except:
-                return make_response(jsonify({"ALERT!": "POST DOES NOT EXISTS"}), 404)
-
-            if len(data_to_return[0]) > 0:
-                return make_response(jsonify(data_to_return), 200)
             else:
-                return make_response(jsonify({"ALERT!": "NO COMMENTS FOUND"}), 404)
+                return make_response(jsonify({"ALERT!": "NO COMMENTS FOUND DOES NOT EXISTS"}), 200)
+
+            return make_response(jsonify(data_to_return[0]), 200)
         else:
             return make_response(jsonify({"ALERT!": "POST WAS NOT FOUND"}))
 
@@ -223,7 +220,7 @@ def get_one_comments(Post_UUID, Comment_UUID):
 def create_comment(Post_UUID):
     if request.method == "POST":
         for Post_Object in mongo_posts.find({"post_uuid": Post_UUID}):
-
+            
             if len(Post_Object["post_comments"]) == 0:
                 comment_uuid = 0
             else:
