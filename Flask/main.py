@@ -441,16 +441,23 @@ def database_posts_all():
         return make_response(jsonify(data_to_return), 200)
 
 
-@app.route("/api/v1.0/post/upvote/<string:Post_ID>", methods=["GET"])
+@app.route("/api/v1.0/post/upvote/<int:Post_ID>", methods=["GET"])
 # @user_authentication_required
 def post_upvote(Post_ID):
     if request.method == "GET":
-        Post_Object_0 = mongo_posts.find_one({"_id": ObjectId(Post_ID)})
-        Post_Object = mongo_posts.update_one({"_id": ObjectId(Post_ID)}, {"$set": {"post_upvotes": Post_Object_0["post_upvotes"] + 1,}})
-        if Post_Object.matched_count == 1:
-            return make_response(jsonify({"SUCCESS!": "Upvoted Comment was Successful!"}))
+        for Post_Object in mongo_posts.find({"post_uuid": Post_ID}):
+            current_upvotes = Post_Object["post_upvotes"]
+            new_upvotes = current_upvotes + 1
+            print(new_upvotes)
+            Post_Object = mongo_posts.update_one({"post_uuid": Post_ID}, {"$set": {"post_upvotes": new_upvotes}})
+            if Post_Object.matched_count == 1:
+                return make_response(jsonify({"SUCCESS!": "Upvoted Comment was Successful!"}))
+            else:
+                return make_response(jsonify({"ALERT!": "SOMETHING WENT WRONG. CONSULT THE TERMINAL FOR MORE INFORMATION."}))
         else:
             return make_response(jsonify({"ALERT!": "POST NOT FOUND"}))
+
+
 
 @app.route("/api/v1.0/posts/create", methods=["POST"])
 # @user_authentication_required

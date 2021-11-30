@@ -70,6 +70,10 @@ export class WebService {
         return this.http.put<any>('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments/" + Comment_UUID, Comment_Package).toPromise();
     } 
 
+    upvotePost(Post_UUID: any) {
+        return this.http.get<any>('http://127.0.0.1:5000/api/v1.0/post/upvote/'+ Post_UUID).toPromise();
+    }
+
 
 
 
