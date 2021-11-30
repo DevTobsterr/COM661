@@ -8,7 +8,7 @@
   <div class="card" style="width: 100vh;">
           <div class="card-body" *ngFor="let post of list_of_posts">
 
-            <a href=""> {{ post.post_title }}</a>
+            
             <h1 class="title text-uppercase"> Use the form below to Update your post. </h1>
 
                     <form [formGroup]=blog_update_submission_form (ngSubmit)="onUpdate()">
@@ -38,7 +38,7 @@
                       <br>
               
                   <div id="btns">
-                    <button class="btn btn-primary" type="submit"> Update Blog </button>
+                    <button class="btn btn-primary" type="submit" (click)="onUpdate()"> Update Blog </button>
                     <button class="btn btn-danger" onclick="reset()"> Reset Form </button>
                   </div>
                   <p class="mt-5 mb-3 text-muted"> BelfastBlog | © 2021 </p>
