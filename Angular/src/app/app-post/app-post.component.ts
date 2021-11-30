@@ -14,10 +14,23 @@ export class AppPostComponent implements OnInit {
   constructor(public webservice: WebService, private route: ActivatedRoute, public AuthenticationService: AuthService, private Router: Router, private formBuilder: FormBuilder) { }
 
 
+
+  isInvalid(control: any) {
+    return this.CommentForm.controls[control].invalid && this.CommentForm.controls[control].touched;
+  }
+
+  isUntouched() {
+    return this.CommentForm.controls.Comment_Author.pristine || this.CommentForm.controls.Comment_Body.pristine;
+  }
+
+  isIncomplete() {
+    return this.isInvalid('Comment_Body') || this.isInvalid('Comment_Author') || this.isUntouched();
+  }
+
   list_of_posts: any = [];
   list_of_comments: any = [];
   CommentForm: any;
-  
+
 
   onDeletePost() {
     this.webservice.deletePost(this.route.snapshot.params["Post_ID"])
@@ -40,7 +53,7 @@ export class AppPostComponent implements OnInit {
 
   async ngOnInit() {
 
-    
+
     this.CommentForm = this.formBuilder.group({
       "Comment_Author": ["", Validators.required],
       "Comment_Body": ["", Validators.required]
@@ -56,5 +69,5 @@ export class AppPostComponent implements OnInit {
 
 
   }
-  
+
 }

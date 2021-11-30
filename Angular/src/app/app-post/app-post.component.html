@@ -44,19 +44,21 @@
                     <form [formGroup]=CommentForm (ngSubmit)="onCreateComment()">
 
                         <h5 class="card-title">Have a comment? Post it here.</h5>
+                            <br>
                             
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">Comment Author: </label>
-                                <input type="text" class="form-control" id="" formControlName="Comment_Author"> 
+                                <input name="Comment_Author" id="Comment_Author" type="text" class="form-control" formControlName="Comment_Author" required> 
                             </div>
                     
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">Comment Body: </label>
-                                <input type="email" class="form-control" id="" formControlName="Comment_Body">
+                                <input name="Comment_Body" id="Comment_Body" type="email" class="form-control" formControlName="Comment_Body" required>
                             </div>
-                    
                             <br>
-                            <button class="btn btn-outline-primary" type="submit">Create Comment</button>
+                            <p *ngIf="isIncomplete()" class="text-uppercase"> You must complete all fields to submit a comment</p>
+                            <br>
+                            <button class="btn btn-outline-primary" *ngIf="!isIncomplete()" type="submit">Create Comment</button>
                     
                 
                         </form> 
