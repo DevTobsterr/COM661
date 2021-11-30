@@ -4,43 +4,152 @@
     <br>
 
     <div class="container">
-        <a class="btn btn-primary" type="button" href="/home" >Go Back</a>
-        <br> 
+        <a class="btn btn-primary" type="button" href="/home">Go Back</a>
+        <br>
         <br>
         <div class="card" style="width: 100vh;">
-                <div class="card-body" *ngFor="let post of list_of_posts">
-        
+            <div class="card-body" *ngFor="let post of list_of_posts">
 
-                    <h5 class="card-title text-uppercase">Post Title: {{ post.post_title }} | Posted On {{ post.post_creation_datetime }}</h5>
+
+
+                <div class="card">
+                    <div class="card-header">Post By: {{ post.post_author_username }} </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Title: {{ post.post_title }}</h5>
+                        <p class="card-text">
+                            Contents: {{ post.post_body }}
+                        </p>
+
+                        <div id="btns">
+                            <button class="btn btn-warning" [routerLink]="['/edit', post.post_uuid]"> Edit Post
+                            </button>
+                            <button class="btn btn-danger" (click)="onDeletePost()"> Delete Post </button>
+                        </div>
+                        <hr>
+
+                        <h1>Comments</h1>
+                        <div *ngFor="let comment of list_of_comments">
+                            <br>
+                            <div class="card">
+                            <div class="card-header">Comment By: {{ comment.comment_author }} - Comment ID: {{
+                                comment.comment_uuid }} </div>
+                            <div class="card-body"> {{ comment.comment_body }}
+
+                                <div id="btns">
+                                    <button class="btn btn-outline-primary"
+                                        [routerLink]="['/edit', post.post_uuid, comment.comment_uuid]"> Edit
+                                        Comment</button>
+                                    <button class="btn btn-outline-danger"
+                                        (click)="onDeleteComment(comment.comment_uuid)"> Delete Comment</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="card">
+                            <div class="card-header"> Have a comment? Post it here.</div>
+                            <div class="card-body">
+
+                                <form [formGroup]=CommentForm (ngSubmit)="onCreateComment()">
+
+                                    <h5 class="card-title">Have a comment? Post it here.</h5>
+                                    <br>
+        
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Comment Author: </label>
+                                        <input name="Comment_Author" id="Comment_Author" type="text" class="form-control"
+                                            formControlName="Comment_Author" required>
+                                    </div>
+        
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Comment Body: </label>
+                                        <input name="Comment_Body" id="Comment_Body" type="email" class="form-control"
+                                            formControlName="Comment_Body" required>
+                                    </div>
+                                    <br>
+                                    <p *ngIf="isIncomplete()" class="text-uppercase"> You must complete all fields to submit a
+                                        comment</p>
+                                    <br>
+                                    <button class="btn btn-outline-primary" *ngIf="!isIncomplete()" type="submit">Create
+                                        Comment</button>
+        
+        
+                                </form>
+
+
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h5 class="card-title text-uppercase">Post Title: {{ post.post_title }} | Posted On {{ post.post_creation_datetime }}</h5>
 
                     <h6 class="card-subtitle mb-2"> Post ID Number: {{ post.post_uuid }} </h6>
                     <h6 class="card-subtitle mb-2"> Post Created By User: {{ post.post_author_username }} </h6>
                     <h6 class="card-subtitle mb-2"> Post Body: {{ post.post_body }} </h6>
-                    <h6 class="card-subtitle mb-2"> Post Upvotes: {{ post.post_upvotes }} </h6>
-
+                    <h6 class="card-subtitle mb-2"> Post Upvotes: {{ post.post_upvotes }} </h6> -->
+<!-- 
                     <hr>
                     <h1 class="lead">Comments for Post {{ post.post_uuid }}</h1>
                     <div class="card-body" *ngFor="let comment of list_of_comments">
                     <h6 class="card-subtitle mb-2"> Comment ID: {{ comment.comment_uuid }} </h6>
                     <h6 class="card-subtitle mb-2"> Comment Author: {{ comment.comment_author }} </h6>
-                    <h6 class="card-subtitle mb-2"> Comment Body: {{ comment.comment_body }} </h6>
-                    
+                    <h6 class="card-subtitle mb-2"> Comment Body: {{ comment.comment_body }} </h6> -->
+<!--                     
                         <div id="btns"> 
                             <button class="btn btn-outline-primary" [routerLink]="['/edit', post.post_uuid, comment.comment_uuid]"> Edit Comment</button>
                             <button class="btn btn-outline-danger" (click)="onDeleteComment(comment.comment_uuid)"> Delete Comment</button>
-                        </div>
+                        </div> -->
 
 
 
-        
-                    </div>
-
-
-
-                    <hr>
-
-
-
+<!-- 
                     <form [formGroup]=CommentForm (ngSubmit)="onCreateComment()">
 
                         <h5 class="card-title">Have a comment? Post it here.</h5>
@@ -64,8 +173,6 @@
                         </form> 
                             <hr>
                 <div id="btns">
-                    <!-- <button class="btn btn-primary" (click)="onUpvote()" [routerLink]="['/upvote', post.post_uuid]"> Upvote</button> -->
-                    <!-- <button class="btn btn-primary"(click)="onUpdate()" [routerLink]="['/edit', post.post_uuid]"> Edit </button> -->
                     <button class="btn btn-warning" [routerLink]="['/edit', post.post_uuid]"> Edit Post </button>
                     <button class="btn btn-danger" (click)="onDeletePost()" > Delete Post </button>
                 </div>
@@ -74,18 +181,18 @@
 
             
                 </div>
-                    
+                     -->
 
 
 
 
 
-
+<!-- 
                 <p class="mt-5 mb-3 text-muted"> BelfastBlog | © 2021 </p>
-            </div>
+            </div> -->
 
- 
-</ng-container>
+
+
 <ng-template #loggedOut>
 
     <br>
@@ -116,7 +223,7 @@
 
 
 
-<style> 
+<style>
     #btns button {
         margin-right: 10px;
     }

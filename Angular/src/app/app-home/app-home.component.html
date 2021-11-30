@@ -4,27 +4,27 @@
 
     <div class="container">
 
-         
         <br>
-    <h1 class="text-center"> BelfastBlog  | All Blog Post's</h1>
-        <div *ngFor="let post of list_of_posts | async">
-            <br>
 
-            <div class="card" style="width: 100vh;">
-                <div class="card-body">
-
-                    <h5 class="card-title">Title: {{ post.post_title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Post by User: <a  class="text-uppercase" [routerLink]="['/user', post.post_author_username]" style="cursor: pointer">{{ post.post_author_username }}</a> </h6>
-                    <h6 class="card-subtitle mb-2 text-muted"> This post was created on {{ post.post_creation_datetime }} <br> Post Upvote Count: {{ post.post_upvotes }} </h6>
-                    <p class="card-text">{{ post.post_body }}</p>
-                    <hr>                    
-                    <button class="btn btn-outline-primary" [routerLink]="['/post', post.post_uuid ]" style="cursor: pointer"> View Post {{ post.post_uuid }}</button>
+    <div *ngFor="let post of list_of_posts | async">
     
-                </div>
-            </div>
-        </div>
 
-        <br>
+        <div class="card">
+            <div class="card-header">Post By: {{ post.post_author_username }}  </div>
+            <div class="card-body">
+              <h5 class="card-title">Title: {{ post.post_title }}</h5>
+              <p class="card-text">
+                {{ post.post_body }}
+              </p>
+              <button class="btn btn-primary" [routerLink]="['/post', post.post_uuid ]" style="cursor: pointer"> View Post</button>
+
+            </div>
+            <div class="card-footer text-muted">Created On: {{ post.post_creation_datetime }}</div>
+          </div>
+          <br>
+
+    </div>
+
         <div id="page_control">
             <button class="btn btn-primary" (click)="PreviousPage()"> Previous Page </button>
             <button class="btn btn-primary" (click)="NextPage()" style="cursor: pointer;"> Next Page </button>

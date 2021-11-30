@@ -2,7 +2,6 @@ import functools
 from itertools import count
 import re
 from flask import Flask, json, make_response, request, jsonify
-from flask.globals import g
 from bson import ObjectId
 from pymongo import MongoClient
 import jwt
@@ -181,7 +180,7 @@ def update_one_comment(Post_UUID, Comment_UUID):
     if request.method == "PUT":
         new_comment_author = request.form["Comment_Author"]
         new_comment_body = request.form["Comment_Body"]
-        mongo_posts.update({"post_uuid": Post_UUID, "post_comments.comment_uuid": Comment_UUID}, {"$set": {"post_comments.$.comment_author": new_comment_author, "post_comments.$.comment_body": new_comment_body }})
+        mongo_posts.update_one({"post_uuid": Post_UUID, "post_comments.comment_uuid": Comment_UUID}, {"$set": {"post_comments.$.comment_author": new_comment_author, "post_comments.$.comment_body": new_comment_body }})
         return make_response(jsonify({"SUCCESS!" : "COMMENT WAS SUCCESSFULLY UPDATED"}))
  
 
@@ -270,7 +269,7 @@ def delete_comment(Post_UUID, Comment_UUID):
 @app.route("/api/v1.0/profile/<string:Username>", methods=["GET"])
 def user_profile(Username):
     if request.method == "GET":
-        User_Object = mongo_comments.find_one({"username":Username})
+        User_Object = mongo_user.find_one({"username":Username})
         if User_Object is not None:
             User_Object_Information = []
             User_Object["_id"]  = str(User_Object["_id"])
