@@ -34,7 +34,7 @@ export class AppPostComponent implements OnInit {
 
   onUpvote() {
     this.webservice.upvotePost(this.route.snapshot.params["Post_ID"]);
-    this.Router.navigate(["/"]);
+    // this.Router.navigate(["/"]);
   }
 
   onDeleteComment(Comment_UUID: any) {

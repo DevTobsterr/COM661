@@ -67,7 +67,7 @@ export class WebService {
         Comment_Package.append("Comment_Author", Post_Content.Comment_Author);
         Comment_Package.append("Comment_Body", Post_Content.Comment_Body);
         console.log(Post_UUID, Comment_UUID)
-        return this.http.put<any>('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments/" + Comment_UUID, Comment_Package);
+        return this.http.put<any>('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments/" + Comment_UUID, Comment_Package).toPromise();
     } 
 
     upvotePost(Post_UUID: any) {

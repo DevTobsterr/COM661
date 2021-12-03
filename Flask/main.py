@@ -447,7 +447,7 @@ def post_upvote(Post_ID):
     if request.method == "GET":
         for Post_Object in mongo_posts.find({"post_uuid": Post_ID}):
             current_upvotes = Post_Object["post_upvotes"]
-            new_upvotes = current_upvotes + 1
+            new_upvotes = int(current_upvotes) + 1
             print(new_upvotes)
             Post_Object = mongo_posts.update_one({"post_uuid": Post_ID}, {"$set": {"post_upvotes": new_upvotes}})
             if Post_Object.matched_count == 1:
