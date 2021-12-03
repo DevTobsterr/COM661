@@ -27,36 +27,35 @@ export class AppPostComponent implements OnInit {
     return this.isInvalid('Comment_Body') || this.isInvalid('Comment_Author') || this.isUntouched();
   }
 
-  list_of_posts: any = [];
-  list_of_comments: any = [];
-  CommentForm: any;
-
-
   onDeletePost() {
     this.webservice.deletePost(this.route.snapshot.params["Post_ID"])
     this.Router.navigate(["/"])
   }
 
   onUpvote() {
-    this.webservice.upvotePost(this.route.snapshot.params["Post_ID"])
-    this.Router.navigate(["/"])
+    this.webservice.upvotePost(this.route.snapshot.params["Post_ID"]);
+    this.Router.navigate(["/"]);
   }
 
   onDeleteComment(Comment_UUID: any) {
     var Post_UUID: any = this.route.snapshot.params["Post_ID"];
-    this.webservice.deleteComment(Post_UUID, Comment_UUID);
-    this.Router.navigate(["/"])
+    this.webservice.deleteComment(Post_UUID, Comment_UUID).subscribe((response: any) => {
+      this.list_of_comments = this.webservice.getComments(this.route.snapshot.params["Post_ID"]);
+    });
 
   }
 
   onCreateComment() {
-    var Post_UUID: any = this.route.snapshot.params["Post_ID"];
-    this.webservice.createComment(this.CommentForm.value, Post_UUID);
-    this.Router.navigate(["/"])
-
+    this.webservice.createComment(this.CommentForm.value, this.route.snapshot.params["Post_ID"]).subscribe((response : any) => {
+      this.CommentForm.reset();
+      this.list_of_comments = this.webservice.getComments(this.route.snapshot.params["Post_ID"]);
+    });
   }
 
-  async ngOnInit() {
+  ngOnInit() {
+
+    this.list_of_comments = this.webservice.getComments(this.route.snapshot.params["Post_ID"]);
+    this.list_of_posts = this.webservice.getPost(this.route.snapshot.params["Post_ID"]);
 
 
     this.CommentForm = this.formBuilder.group({
@@ -64,15 +63,11 @@ export class AppPostComponent implements OnInit {
       "Comment_Body": ["", Validators.required]
     })
 
-    var post_response = await this.webservice.getPost(this.route.snapshot.params["Post_ID"]);
-    console.log(post_response)
-    this.list_of_posts = post_response;
-
-    var comment_response = await this.webservice.getComments(this.route.snapshot.params["Post_ID"])
-    console.log(comment_response);
-    this.list_of_comments = comment_response;
-
-
   }
+
+  list_of_posts: any = [];
+  list_of_comments: any = [];
+  CommentForm: any;
+
 
 }

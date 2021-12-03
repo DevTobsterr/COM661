@@ -12,11 +12,11 @@ export class WebService {
     list_of_comments: any;
 
     getPosts(page: number) {
-        return this.http.get('http://127.0.0.1:5000/api/v1.0/posts?pn='+ page)
+        return this.http.get<any>('http://127.0.0.1:5000/api/v1.0/posts?pn='+ page);
     } 
 
     getPost(Post_ID: any) {
-        return this.http.get('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_ID).toPromise()   
+        return this.http.get<any>('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_ID).toPromise();
     }
 
     deletePost(Post_ID: any) {
@@ -42,7 +42,7 @@ export class WebService {
     }
 
     getComments(Post_UUID: any) {
-        return this.http.get('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments").toPromise()   
+        return this.http.get('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments");
     }
 
     getComment(Post_UUID: any, Comment_UUID: any) {
@@ -50,7 +50,7 @@ export class WebService {
     }
 
     deleteComment(Post_UUID: any, Comment_UUID: any) {
-        return this.http.delete('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments/" + Comment_UUID).toPromise()   
+        return this.http.delete('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments/" + Comment_UUID);
 
 
     } 
@@ -59,7 +59,7 @@ export class WebService {
         let Comment_Package = new FormData();
         Comment_Package.append("Comment_Author", Comment_Content.Comment_Author);
         Comment_Package.append("Comment_Body", Comment_Content.Comment_Body);
-        return this.http.post<any>('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments", Comment_Package).toPromise();
+        return this.http.post<any>('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments", Comment_Package);
     }
     
     updateComment(Post_Content: any, Post_UUID: any, Comment_UUID: any) {
@@ -67,7 +67,7 @@ export class WebService {
         Comment_Package.append("Comment_Author", Post_Content.Comment_Author);
         Comment_Package.append("Comment_Body", Post_Content.Comment_Body);
         console.log(Post_UUID, Comment_UUID)
-        return this.http.put<any>('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments/" + Comment_UUID, Comment_Package).toPromise();
+        return this.http.put<any>('http://127.0.0.1:5000/api/v1.0/posts/'+ Post_UUID + "/comments/" + Comment_UUID, Comment_Package);
     } 
 
     upvotePost(Post_UUID: any) {

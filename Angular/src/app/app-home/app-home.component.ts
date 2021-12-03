@@ -26,7 +26,8 @@ export class AppHomeComponent implements OnInit {
       this.list_of_posts = this.webservice.getPosts(this.page);
   }
 
-  async ngOnInit() {
+  ngOnInit() {
+
     this.list_of_posts = this.webservice.getPosts(this.page);
     
   }

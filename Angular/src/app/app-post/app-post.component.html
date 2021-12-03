@@ -8,7 +8,7 @@
         <br>
         <br>
         <div class="card" style="width: 100vh;">
-            <div class="card-body" *ngFor="let post of list_of_posts">
+            <div class="card-body" *ngFor="let post of list_of_posts | async">
 
 
 
@@ -29,7 +29,7 @@
                         <hr>
 
                         <h1>Comments</h1>
-                        <div *ngFor="let comment of list_of_comments">
+                        <div *ngFor="let comment of list_of_comments | async">
                             <br>
                             <div class="card">
                             <div class="card-header">Comment By: {{ comment.comment_author }} - Comment ID: {{
@@ -82,26 +82,13 @@
                             </div>
 
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 </ng-container>
 
 
