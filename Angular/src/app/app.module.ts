@@ -35,8 +35,8 @@ import { AppEditCommentComponent } from './app-edit-comment/app-edit-comment.com
     AppRoutingModule, 
     HttpClientModule,
     AuthModule.forRoot( {
-      domain: 'dev-84px7oyo.eu.auth0.com',
-      clientId: 'DQOyiNOmR9TcJH4GeZPFAyeTU11f0Uee'
+      domain: "<domain>",
+      clientId: "<client_id>",
     }),
     ReactiveFormsModule
   ],
